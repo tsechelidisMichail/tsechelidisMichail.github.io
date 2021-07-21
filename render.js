@@ -1,5 +1,5 @@
 (function () {
-  var file = file || "https://github.com/tsechelidisMichail/tsechelidisMichail/blob/b65ec869cd9cf748e19d55862cd9807afc200c17/README.md";
+  var file = file || "https://github.com/tsechelidisMichail/tsechelidisMichail/blob/main/README.md";
   var reader = new stmd.DocParser();
   var writer = new stmd.HtmlRenderer();
   var xhr = new XMLHttpRequest();
