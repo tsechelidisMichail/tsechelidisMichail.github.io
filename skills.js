@@ -1,22 +1,51 @@
 'use strict';
 
 function sortAlphabetically(collum){
+	//the function is just coppied from w3schools.
+	var table, rows, switching, i, x, y, shouldSwitch;
+	table = document.getElementById("table");
+	switching = true;
 	
+	while (switching) {
+		switching = false;
+		rows = table.rows;
+		
+		for (i = 1; i < (rows.length - 1); i++) {
+			shouldSwitch = false;
+			x = rows[i].getElementsByTagName("TD")[collum];
+			y = rows[i + 1].getElementsByTagName("TD")[collum];
+			if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+				shouldSwitch = true;
+				break;
+			}
+		}
+		if (shouldSwitch) {
+			rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+			switching = true;
+		}
+	}
 }
 
 function sortCollum(collum){
 	if(collum==0){
 		sortAlphabetically(0);
-	}
-	var fewRows = document.getElementsByClassName("table-row-"+collum);
-    var table = document.getElementById("table");
-	var allRows = table.rows;
-	var x = fewRows[0];
-	var y = allRows[1];
+	}else{
+		var fewRows = document.getElementsByClassName("table-row-"+collum);
+		var table = document.getElementById("table");
+		var allRows = table.rows;
+		
+		var counter =0;
 	
-	if(y.className!=x.className){
-		y.parentNode.insertBefore(x, y);
-	}//TODO:ACTUALL SORTING THE WHOLE TABLE
+		while(counter<fewRows.length){
+			var x = fewRows[counter];
+			var y = allRows[counter+1];
+			
+			if(y.className!=x.className){
+				y.parentNode.insertBefore(x, y);
+			}
+			counter++;
+		}
+	}
 }
 
 function loadDoc() {
@@ -88,7 +117,7 @@ function loadDoc() {
 
 		skills.innerHTML += "<tr id='table-row-"+k+"'></tr>";
 		var skill = document.getElementById("table-row-"+k);
-		skill.innerHTML+= "<td id='"+skillData[k]+"Skill'>"+skillData[k]+"</td>";
+		skill.innerHTML+= "<td id='"+skillData[k]+"Skill' class='skillName'>"+skillData[k]+"</td>";
 		
 		//then depending on the rating add empty <td> until you finaly play TICK at rating
 		var v;
