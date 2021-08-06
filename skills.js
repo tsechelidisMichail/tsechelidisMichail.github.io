@@ -1,7 +1,22 @@
 'use strict';
 
+function ascend(state,x,y){
+	if(state=="true"){
+		return x>y;
+	}else{
+		return y>x;
+	}
+}
+
 function sortAlphabetically(collum){
 	//the function is just coppied from w3schools.
+	
+	//this part is just for ascending/dis.
+	if(document.getElementById("button-"+collum).value=="false"){
+		document.getElementById("button-"+collum).value = "true";
+	}else{
+		document.getElementById("button-"+collum).value = "false";
+	}
 	var table, rows, switching, i, x, y, shouldSwitch;
 	table = document.getElementById("table");
 	switching = true;
@@ -14,7 +29,7 @@ function sortAlphabetically(collum){
 			shouldSwitch = false;
 			x = rows[i].getElementsByTagName("TD")[collum];
 			y = rows[i + 1].getElementsByTagName("TD")[collum];
-			if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+			if (ascend(document.getElementById("button-"+collum).value,x.innerHTML.toLowerCase(),y.innerHTML.toLowerCase())) {
 				shouldSwitch = true;
 				break;
 			}
@@ -106,7 +121,7 @@ function loadDoc() {
 	
 	//first insert the titles of the ratings
 	for(var j=0;j<Object.keys(titleData).length;j++){
-		titles.innerHTML += "<th><button class='tableButton' onClick='buttonsOnlick("+j+")'>"+titleData[j]+"</button></th>";
+		titles.innerHTML += "<th><button value='false' id='button-"+j+"' class='tableButton' onClick='buttonsOnlick("+j+")'>"+titleData[j]+"</button></th>";
 	}
 
 	//then create the <tr> and the first <td> - the skill
