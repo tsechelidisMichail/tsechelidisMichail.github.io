@@ -104,9 +104,6 @@ function loadDoc() {
 	var titles = document.getElementById("rowTitles");
 	var skills = document.getElementById("tableBody");
 	
-	function test(j){
-		wow(j);
-	}
 	//first insert the titles of the ratings
 	for(var j=0;j<Object.keys(titleData).length;j++){
 		titles.innerHTML += "<th><button class='tableButton' onClick='buttonsOnlick("+j+")'>"+titleData[j]+"</button></th>";
