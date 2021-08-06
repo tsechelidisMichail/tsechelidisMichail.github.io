@@ -1,1 +1,3 @@
-BAD,NOT BAD,GOOD,TOO GOOD,EXPERT,java,5,html,2,EOF
+Saw it at uni,Did work with,Understood,Did work with+understood,Did extensive work,Pretty good
+,java,6,html,4,php,3,c,5,git,4,eclipse,5,tableau,2,matlab,1,css,4,js,5,sql,1,maven,2
+,EOF

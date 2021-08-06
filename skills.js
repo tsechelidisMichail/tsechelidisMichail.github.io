@@ -1,10 +1,28 @@
 'use strict';
 
+function sortAlphabetically(collum){
+	
+}
+
+function sortCollum(collum){
+	if(collum==0){
+		sortAlphabetically(0);
+	}
+	var fewRows = document.getElementsByClassName("table-row-"+collum);
+    var table = document.getElementById("table");
+	var allRows = table.rows;
+	var x = fewRows[0];
+	var y = allRows[1];
+	
+	if(y.className!=x.className){
+		y.parentNode.insertBefore(x, y);
+	}//TODO:ACTUALL SORTING THE WHOLE TABLE
+}
+
 function loadDoc() {
   const xhttp = new XMLHttpRequest();
   
   xhttp.open("GET", "skills.txt", true);
-  xhttp.send();
   
   xhttp.onload = function() {
     var data = this.responseText;
@@ -25,7 +43,7 @@ function loadDoc() {
 	var counter =0;
 	var i = 0;
 	
-	titleData.push(word);//to create empty cell at <th> so skills go under it
+	titleData.push("Skills");//to create empty cell at <th> so skills go under it
 
 	/*
 	*The below loop aims to recognise the words from the data and categorize
@@ -38,9 +56,9 @@ function loadDoc() {
 
 	while(word!="EOF"){//.txt needs EOF so it can terminate the parse
 		if(data[i]==","){//.txt must be like CSV
-			if(counter<5){//insert depending on how many rates you devide each skill 
+			if(counter<6){//insert depending on how many ratings you devide each skill 
 				titleData.push(word);
-			}else if(counter%2==1){//CHANGE to 0 if your ratings are even at number
+			}else if(counter%2==0){//CHANGE to 0 if your ratings are even at number
 				skillData.push(word);
 			}else{
 				ratingData.push(word);
@@ -57,38 +75,35 @@ function loadDoc() {
 	var titles = document.getElementById("rowTitles");
 	var skills = document.getElementById("tableBody");
 	
+	function test(j){
+		wow(j);
+	}
 	//first insert the titles of the ratings
 	for(var j=0;j<Object.keys(titleData).length;j++){
-		titles.innerHTML += "<th>"+titleData[j]+"</th>";
+		titles.innerHTML += "<th><button class='tableButton' onClick='buttonsOnlick("+j+")'>"+titleData[j]+"</button></th>";
 	}
 
 	//then create the <tr> and the first <td> - the skill
 	for(var k=0;k<Object.keys(skillData).length;k++){
 
-		skills.innerHTML += "<tr id="+skillData[k]+"></tr>";
-		var skill = document.getElementById(skillData[k]);
-		skill.innerHTML+= "<td>"+skillData[k]+"</td>";
+		skills.innerHTML += "<tr id='table-row-"+k+"'></tr>";
+		var skill = document.getElementById("table-row-"+k);
+		skill.innerHTML+= "<td id='"+skillData[k]+"Skill'>"+skillData[k]+"</td>";
 		
 		//then depending on the rating add empty <td> until you finaly play TICK at rating
-		//position and give <td> its value.
-		for(var v=0;v<ratingData[k]-1;v++){
+		var v;
+		for(v=1;v<ratingData[k];v++){
 			skill.innerHTML+= "<td></td>";
 		}
-		skill.innerHTML+= "<td value="+ratingData[k]+">TICK</td>";
-	}
-	
+		skill.innerHTML+= "<td class='tick-"+v+"'>TICK</td>";
+		skill.setAttribute("class", "table-row-"+v);
+	}	
   }
+  
+  xhttp.send();
 }
 
 loadDoc();
-	
-
-
-
-
-
-
-
 
 
 
