@@ -1,5 +1,10 @@
 'use strict';
 
+/*Please don't use this for sensitive projects - 
+*consider changing innerHtml concatenation and use DOM functions to do your job
+* Take care of hard coded way to parse the .txt (example <th> in population =6 , 108 line).
+*/
+
 function ascend(state,x,y){
 	if(state=="true"){
 		return x>y;
